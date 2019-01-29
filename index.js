@@ -3,7 +3,7 @@
 let searchURL = 'https://api.github.com/users/:username/repos';
 
 function displayResults(responseJson) {
-//   if there are previous results, remove them
+  // if there are previous results, remove them
   console.log(responseJson);
   $('#results-list').empty();
     // for each username in the response, add the username to the results list
@@ -20,13 +20,7 @@ function getRepos() {
   console.log(url);
 
   fetch(url)
-    .then(response => {
-      if (response.ok) {
-        console.log(response);
-        return response;
-      }
-      throw new Error(response.statusText);
-    })
+    .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
